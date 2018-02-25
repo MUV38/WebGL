@@ -11,8 +11,9 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
+uniform vec3 u_lightColor;
+
 vec3 lightDir = normalize(vec3(0.5, 1.0, 1.0));
-vec3 lightColor = vec3(1.0, 0.8, 0.65);
 
 struct Material
 {
@@ -183,7 +184,7 @@ void main()
                 vec3 normal = GetNormal(cur_pos);
                 
                 // diffuse
-                vec3 diff = r.mat.albedo * vec3(saturate(dot(normal, L))) * lightColor;
+                vec3 diff = r.mat.albedo * vec3(saturate(dot(normal, L))) * u_lightColor;
                 // shadow
                 diff *= CalcSoftshadow( cur_pos, L, 0.02, 2.5 );
                 // ambient
